@@ -1,17 +1,16 @@
 use std::fs;
 
 fn main() {
-    let filename = "data/example";
+    let filename = "data/input";
 
     let measurements: Vec<u32> = fs::read_to_string(filename)
         .expect("Something went wrong reading the file")
         .lines()
         .map(|x| x.parse::<u32>().unwrap())
+        .collect::<Vec<u32>>()
+        .windows(3)
+        .map( |x| x.iter().sum::<u32>())
         .collect();
-    let windows = measurements.windows(3);
-    for window in windows {
-        println!("window:\n{:?}", window.iter().sum::<u32>());
-    }
     let mut counter = 0;
     let mut last_elem: Option<u32> = None;
     for m in measurements {
