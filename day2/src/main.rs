@@ -35,8 +35,8 @@ impl CommandList {
         let commands_str = file_content.lines();
         let mut command_vec: Vec<Command> = Vec::new();
         for command in commands_str {
-            let direction = command.split(" ").collect::<Vec<&str>>()[0];
-            let value: u32 = command.split(" ").collect::<Vec<&str>>()[1].parse().unwrap();
+            let direction = command.split(' ').collect::<Vec<&str>>()[0];
+            let value: u32 = command.split(' ').collect::<Vec<&str>>()[1].parse().unwrap();
             match direction {
                 "forward" => command_vec.push(Command::Forward(value)),
                 "down" => command_vec.push(Command::Down(value)),
@@ -61,7 +61,7 @@ struct Submarine {
 impl Submarine {
     fn new(command_list: CommandList) -> Self {
         Submarine {
-            command_list: command_list,
+            command_list,
             depth: 0,
             position: 0,
             aim: 0,
