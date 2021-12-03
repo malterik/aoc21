@@ -1,8 +1,8 @@
 use std::fs;
 
 fn main() {
-    println!("part1 solution: {}" , part1());
-    println!("part2 solution: {}" , part1());
+    println!("part1 solution: {}", part1());
+    println!("part2 solution: {}", part2());
 }
 
 fn part1() -> u32 {
@@ -35,7 +35,7 @@ fn part2() -> u32 {
         .map(|x| x.parse::<u32>().unwrap())
         .collect::<Vec<u32>>()
         .windows(3)
-        .map( |x| x.iter().sum::<u32>())
+        .map(|x| x.iter().sum::<u32>())
         .collect();
     let mut counter = 0;
     let mut last_elem: Option<u32> = None;
