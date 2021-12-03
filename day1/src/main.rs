@@ -16,10 +16,8 @@ fn part1() -> u32 {
     let mut counter = 0;
     let mut last_elem: Option<u32> = None;
     for m in measurements {
-        if last_elem.is_some() {
-            if m > last_elem.unwrap() {
-                counter += 1;
-            }
+        if last_elem.is_some() &&  m > last_elem.unwrap() {
+            counter += 1;
         }
         last_elem = Some(m);
     }
@@ -40,10 +38,8 @@ fn part2() -> u32 {
     let mut counter = 0;
     let mut last_elem: Option<u32> = None;
     for m in measurements {
-        if last_elem.is_some() {
-            if m > last_elem.unwrap() {
-                counter += 1;
-            }
+        if last_elem.is_some() &&  m > last_elem.unwrap() {
+            counter += 1;
         }
         last_elem = Some(m);
     }
