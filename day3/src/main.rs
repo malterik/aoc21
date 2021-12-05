@@ -97,6 +97,60 @@ fn main() {
         "energy consumption: {}",
         diag_report.get_power_consumption(12)
     );
+    part2("data/input");
+}
+
+fn part2(input: &str) {
+    println!("----------Part2-------------");
+    let mut file = fs::read_to_string(input).unwrap();
+    let mut report: Vec<&str> = file.lines().collect();
+    let mut report_co2 = report.clone();
+    let num_of_bits = report[0].len();
+    for i in 0..num_of_bits {
+        let mut zero_counter = 0;
+        let mut one_counter = 0;
+        for line in &report {
+            match line.chars().nth(i).unwrap() {
+                '1' => one_counter += 1,
+                '0' => zero_counter += 1,
+                _ => panic!("Error in report"),
+            };
+        }
+        if one_counter >= zero_counter {
+            report = report.clone().into_iter().filter( |l| l.chars().nth(i).unwrap() == '1').collect();
+        } else  {
+            report = report.clone().into_iter().filter( |l| l.chars().nth(i).unwrap() == '0').collect();
+        }
+        if report_co2.len() == 1 {
+            break;
+        }
+        println!("report:\n{:?}", report);
+    }
+    let oxygen_rating = u32::from_str_radix(report[0], 2).unwrap();
+    println!("oxygen_rating: {}",  oxygen_rating);
+
+    for i in 0..num_of_bits {
+        let mut zero_counter = 0;
+        let mut one_counter = 0;
+        for line in &report_co2 {
+            match line.chars().nth(i).unwrap() {
+                '1' => one_counter += 1,
+                '0' => zero_counter += 1,
+                _ => panic!("Error in report"),
+            };
+        }
+        if zero_counter <= one_counter {
+            report_co2 = report_co2.clone().into_iter().filter( |l| l.chars().nth(i).unwrap() == '0').collect();
+        } else {
+            report_co2 = report_co2.clone().into_iter().filter( |l| l.chars().nth(i).unwrap() == '1').collect();
+        }
+        if report_co2.len() == 1 {
+            break;
+        }
+    }
+    let scrubber_rating = u32::from_str_radix(report_co2[0], 2).unwrap();
+    println!("scrubber_rating: {}",  scrubber_rating);
+    println!("life support rating: {}", scrubber_rating * oxygen_rating);
 }
 
 #[cfg(test)]
